@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head> <!-- metainformazioni -->
+        <title>day2.1</title>
+        <script type="text/javascript">
+        
+        function tk(val) {
+            return val ? val : 0;
+        }
+
+        function getresult(inn) {
+            
+            var inputform = document.getElementById("input")
+            var input = parseInt(inputform.value);
+            // alert(input)
+            // if (!input) input = inn
+
+            var dirsord = "right"
+            var dirs = {"up": 0, "left": 0, "down": 0, "right": 0}
+            var curx=0, cury=0;
+            var box = {"0:0": 1}
+            for(var i=1; i<input; i++) {
+                switch(dirsord) {
+                    case "right": {
+                        curx++;
+                        if (curx > dirs[dirsord]) {
+                            dirs[dirsord]++;
+                            dirsord = "up"
+                        }
+                        break;
+                    }
+                    case "up": {
+                        cury++;
+                        if (cury > dirs[dirsord]) {
+                            dirs[dirsord]++;
+                            dirsord = "left"
+                        }
+                        break;
+                    }
+                    case "left": {
+                        curx--;
+                        if (curx < dirs[dirsord]) {
+                            dirs[dirsord]--;
+                            dirsord = "down"
+                        }
+                        break;
+                    }
+                    case "down": {
+                        cury--;
+                        if (cury < dirs[dirsord]) {
+                            dirs[dirsord]--;
+                            dirsord = "right"
+                        }
+                        break;
+                    }
+
+                }
+                box[curx+":"+cury] = 
+                    tk(box[(curx+1)+":"+cury])+ tk(box[curx+":"+(cury+1)]) + tk(box[(curx-1)+":"+cury]) + tk(box[curx+":"+(cury-1)]) + tk(box[(curx+1)+":"+(cury+1)]) + tk(box[(curx-1)+":"+(cury-1)]) + tk(box[(curx+1)+":"+(cury-1)]) + tk(box[(curx-1)+":"+(cury+1)])
+
+                if (box[curx+":"+cury]>input) break;
+            }
+
+            var div = document.getElementById("result")
+            div.innerHTML = box[curx+":"+cury]
+
+        }
+        </script>
+    </head>
+    <body>
+        <div id="result" style="width:600px; height: 200px; background:yellow; position: absolute" ></div>
+        <button type="button" id="getresult" style="position: absolute; left: 670px;"onclick="getresult(10)">Get Result</button>
+        <input name="" type="number" id="input" style="position: absolute; left: 770px;"/>
+    </body>
+</html>
