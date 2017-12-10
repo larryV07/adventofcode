@@ -17,8 +17,8 @@ if((line=file.ReadLine()) == null) {
 string[] split = ParseLine(line);
 int x=0, y=0;
 int axis = -1, sign = +1;
-List<int[]> locations = new List<int[]>();
-locations.Add(new int[] {0,0});
+Dictionary<string, int> locations = new Dictionary<string, int>();
+locations.Add("0;0", 1);
 bool found = false;
 foreach(string c in split) {
     char dir = c.First();
@@ -28,17 +28,34 @@ foreach(string c in split) {
     if(dir == 'L') sign *= axis;
     axis *= -1;
 
-    if (axis > 0) x += pad * sign;
-    if (axis < 0) y += pad * sign;
-
-    foreach(int[] loc in locations) {
-        if(loc[0]==x && loc[1] == y) {
-            found = true;
-            break;
+    if (axis > 0) {
+        int i;
+        for(i = 1; i<=pad; i++) {
+            x+=sign;
+            string arr = x+";"+y;
+            if(locations.ContainsKey(arr)) {
+                found = true;
+                break;
+            } else {
+                locations[arr] = 1;
+            }
         }
     }
+    if (axis < 0) {
+        int i;
+        for(i = 1; i<=pad; i++) {
+            y+=sign;
+            string arr = x+";"+y;
+            if(locations.ContainsKey(arr)) {
+                found = true;
+                break;
+            } else {
+                locations[arr] = 1;
+            }
+        }
+    }
+    
     if (found) break;
-    else locations.Add(new int[] {x, y});
 }
 
 Console.WriteLine(Math.Abs(x) + Math.Abs(y));
