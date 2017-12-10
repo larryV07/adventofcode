@@ -17,12 +17,9 @@ if((line=file.ReadLine()) == null) {
 string[] split = ParseLine(line);
 int x=0, y=0;
 int axis = -1, sign = +1;
-<<<<<<< HEAD:adventofcode2016/day01/day01.csx
-=======
 Dictionary<string, int> locations = new Dictionary<string, int>();
 locations.Add("0;0", 1);
 bool found = false;
->>>>>>> edit-day01-pt2-2016:adventofcode2016/day01/day01.2.csx
 foreach(string c in split) {
     char dir = c.First();
     int pad = Int32.Parse(c.Remove(0, 1));
@@ -31,11 +28,6 @@ foreach(string c in split) {
     if(dir == 'L') sign *= axis;
     axis *= -1;
 
-<<<<<<< HEAD:adventofcode2016/day01/day01.csx
-    if (axis > 0) x += pad * sign;
-    if (axis < 0) y += pad * sign;
-
-=======
     if (axis > 0) {
         int i;
         for(i = 1; i<=pad; i++) {
@@ -64,7 +56,6 @@ foreach(string c in split) {
     }
     
     if (found) break;
->>>>>>> edit-day01-pt2-2016:adventofcode2016/day01/day01.2.csx
 }
 
 Console.WriteLine(Math.Abs(x) + Math.Abs(y));
