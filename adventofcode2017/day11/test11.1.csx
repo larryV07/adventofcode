@@ -3,7 +3,35 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 
-StreamReader file = new StreamReader(@"C:\Users\Lorenzo Volpi\Documents\GitHub\adventofcode\adventofcode2017\day10\input.txt");
+public void UpdateTrip(string step, ref double x, ref double y) {
+    
+    if(step == "n") { y+=1; }
+    else if(step == "s") { y+=-1; }
+    else if(step == "ne") { x+=0.5; y+=0.5; }
+    else if(step == "nw") { x+=-0.5; y+=0.5; }
+    else if(step == "se") { x+=0.5; y+=-0.5; }
+    else if(step == "sw") { x+=-0.5; y+=-0.5; }
+    
+}
+
+public double HexDistance(double x, double y) {
+    double line = 0, diag = 0; 
+    if(Math.Abs(y) > Math.Abs(x)) {
+        line = Math.Abs(y) - Math.Abs(x);
+        diag = Math.Abs(x * 2.0);
+    } else if(Math.Abs(y) < Math.Abs(x)) {
+        line = (Math.Abs(x) - Math.Abs(y))*2;
+        diag = Math.Abs(y * 2.0);
+    } else {
+        diag = Math.Abs(x * 2.0);
+    }
+
+
+    return diag + line;
+}
+
+
+StreamReader file = new StreamReader(@"C:\Users\Lorenzo Volpi\Documents\GitHub\adventofcode\adventofcode2017\day11\input.txt");
 
 string line;
 if((line=file.ReadLine()) == null) {
@@ -13,33 +41,14 @@ if((line=file.ReadLine()) == null) {
 
 file.Close();
 
-string[] slengths = line.Split(new char[]{','});
-int[] lengths = new int[slengths.Length];
-for(int i=0; i<slengths.Length; i++){
-    try{
-        lengths[i] = Int32.Parse(slengths[i]);    
-    } catch (FormatException e) {
-        Console.WriteLine("Format: " + slengths[i]);
-    }
-    // Console.WriteLine(lengths[i]);
+string[] steps = line.Split(new char[]{','});
+double x = 0, y = 0, max = 0;
+for(int i=0; i<steps.Length; i++){
+    UpdateTrip(steps[i], ref x, ref y);
+    double temp = HexDistance(x, y);
+    max = temp > max ? temp : max;
 } 
 
-int[] list = new int[256];
-for(int i = 0; i<list.Length; i++) list[i] = i;
-int skip = 0;
-int pos = 0;
-
-foreach(int len in lengths) {
-    int start=pos, end = (pos+len-1 + 256) % 256;
-    Console.WriteLine(start + ";" + end);
-    for(int i=0, j=len-1; i<=j; i++, j--) {
-        int temp = list[(i+start)%256];
-        list[(i+start)%256] = list[(j+start)%256];
-        list[(j+start)%256] = temp;
-    }
-
-    pos = (pos + len + skip) % 256;
-    skip++;
-}
-
-Console.WriteLine(list[0] * list[1]);
+Console.WriteLine(x+";"+y);
+Console.WriteLine(HexDistance(x, y));
+Console.WriteLine(max);
