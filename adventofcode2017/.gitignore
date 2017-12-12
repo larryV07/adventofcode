@@ -1,2 +1,4 @@
 */input.txt
 web.config
+*/*.json
+.vscode
