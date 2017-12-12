@@ -1,0 +1,6 @@
+.vscode
+web.config
+input.txt
+*.json
+*.html
+!*.csx
