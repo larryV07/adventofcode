@@ -1,5 +1,4 @@
-./**/**/input.txt
-./**/**/*.json
-./**/**/*.html
-./**/*.json
+/adventofcode/**/input.txt
+/adventofcode/**/*.html
+/adventofcode/**/*.json
 
