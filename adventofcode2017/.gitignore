@@ -3,5 +3,3 @@ web.config
 */*.json
 .vscode
 */*.html
-day*
-!day*/*.csx
