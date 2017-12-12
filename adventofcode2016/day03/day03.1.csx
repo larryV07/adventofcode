@@ -15,20 +15,12 @@ public bool CheckTriangle(int[] tri) {
 StreamReader file = new StreamReader("input.txt");
 
 List<int[]> triangles = new List<int[]>();
-string l1, l2, l3;
-while((l1=file.ReadLine()) != null && (l2=file.ReadLine()) != null && (l3=file.ReadLine()) != null) {
-    string[] sn1 = l1.Split(new string[] {"  "}, StringSplitOptions.RemoveEmptyEntries);
-    string[] sn2 = l2.Split(new string[] {"  "}, StringSplitOptions.RemoveEmptyEntries);
-    string[] sn3 = l3.Split(new string[] {"  "}, StringSplitOptions.RemoveEmptyEntries);
-    
-    for(int j=0; j<3; j++) {
-        int[] n = new int[3];
-        n[0] = Int32.Parse(sn1[j]); 
-        n[1] = Int32.Parse(sn2[j]); 
-        n[2] = Int32.Parse(sn3[j]); 
-        triangles.Add(n);
-    }
-    
+string l;
+while((l=file.ReadLine()) != null) {
+    string[] sn = l.Split(new string[] {"  "}, StringSplitOptions.RemoveEmptyEntries);
+    int[] n = new int[sn.Length];
+    for(int i=0; i<sn.Length; i++) { n[i] = Int32.Parse(sn[i]); }
+    triangles.Add(n);
 }
 
 file.Close();
