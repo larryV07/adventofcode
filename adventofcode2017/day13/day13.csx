@@ -50,6 +50,11 @@ while((line=file.ReadLine()) != null) {
 
 file.Close();
 
+DateTime t1 = DateTime.Now;
+int pt1 = ScanRisk(0, ref heights);
+int pt2 = MinDelay(ref heights);
+DateTime t2 = DateTime.Now;
 
-Console.WriteLine(ScanRisk(0, ref heights));
-Console.WriteLine(MinDelay(ref heights));
+Console.WriteLine("pt1: " + pt1);
+Console.WriteLine("pt2: " + pt2);
+Console.WriteLine("Time: " + (t2-t1).ToString("%mm'm '%ss's '%fff'ms '"));
