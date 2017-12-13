@@ -17,9 +17,22 @@ public int ScanRisk(int delay, ref int[] heights) {
     return risk;
 }
 
+public bool ZeroScanRisk(int delay, ref int[] heights) {
+    bool zero = true;
+
+    for(int i=0; i<heights.Length; i++) {
+        if(heights[i] > 0 && scanInTop(delay+i, heights[i])) {
+            zero = false;
+            break;
+        }
+    }
+
+    return zero;
+}
+
 public int MinDelay(ref int[] heights) {
     int delay = -1;
-    while( ScanRisk(++delay, ref heights) > 0 || scanInTop(delay, heights[0]) );
+    while( !ZeroScanRisk(++delay, ref heights) );
 
     return delay;
 }
