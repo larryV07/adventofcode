@@ -37,7 +37,7 @@ public int MinDelay(ref int[] heights) {
     return delay;
 }
 
-int[] heights = new int[100];
+int[] heights = new int[146];
 
 StreamReader file = new StreamReader(@"input.txt");
 
@@ -57,4 +57,4 @@ DateTime t2 = DateTime.Now;
 
 Console.WriteLine("pt1: " + pt1);
 Console.WriteLine("pt2: " + pt2);
-Console.WriteLine("Time: " + (t2-t1).ToString("%mm'm '%ss's '%fff'ms '"));
+Console.WriteLine("Time: " + (t2-t1).ToString("%mm'm '%s's '%fff'ms '"));
