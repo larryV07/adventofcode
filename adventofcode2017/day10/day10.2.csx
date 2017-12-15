@@ -68,7 +68,7 @@ for(int i=0; i<256/16; i++) {
 
 string[] hex = new string[256/16];
 for(int i =0; i<dense.Length; i++) {
-    Console.Write(String.Format("{0:X}", dense[i]).ToLower());
+    Console.Write(String.Format("{0:X2}", dense[i]).ToLower());
 }
 Console.WriteLine();
 
