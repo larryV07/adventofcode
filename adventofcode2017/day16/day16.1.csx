@@ -38,16 +38,6 @@ public void parseComm(string comm, ref string[] arr) {
 
 }
 
-
-public bool arreq(string[] a, string[] b) {
-    for(int i=0; i<a.Length; i++) {
-        if(!a[i].Equals(b[i])) return false;
-    }
-
-    return true;
-}
-
-
 StreamReader file = new StreamReader(@"input.txt");
 string line;
 if((line=file.ReadLine()) == null) {
@@ -57,31 +47,12 @@ if((line=file.ReadLine()) == null) {
 file.Close();
 
 string[] comms = line.Split(',');
+Console.WriteLine(comms.Length);
 string[] arr = new string[] {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p"};
-string[] orig = new string[] {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p"};
 
-int count = 0;
-bool end = false;
-while(!end){
-    foreach(string c in comms) {
-        count++;
-        parseComm(c, ref arr);
-        if(arreq(arr, orig)) {
-            end=true;
-            break;
-        }
-    }
+foreach(string c in comms) {
+    parseComm(c, ref arr);
 }
 
-if( (count % comms.Length) == 0 ) {
-    int iter = 1000000000 % (count/comms.Length);
-
-    for(int i=0; i<iter; i++) {
-        foreach(string c in comms) {
-            parseComm(c, ref arr);
-        }
-    }
-
-    foreach(string s in arr) Console.Write(s);
-    Console.WriteLine();
-}
+foreach(string s in arr) Console.Write(s);
+Console.WriteLine();
